@@ -1,0 +1,316 @@
+<?php
+namespace Petlost\FrontBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Petlost\FrontBundle\Util\Util;
+use Doctrine\Common\Collections\Collection;
+/**
+ * Petlost\FrontBundle\Entity\Anuncio
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Petlost\FrontBundle\Entity\AnuncioRepository")
+ */
+class Anuncio {
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     * @var string $titulo
+     *
+     * @ORM\Column(name="titulo", type="string", length=100)
+     * @Assert\NotBlank()
+     */
+    private $titulo;
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length( max="200")
+     */
+    protected $descripcion;
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=100)
+     * @Assert\NotBlank()
+     */
+    private $slug;
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(name="created", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $created;
+    /**
+     * @var datetime $updated
+     *
+     * @ORM\Column(name="updated", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $updated;
+    /**
+     * @var integer $mascota
+     *
+     * @ORM\ManyToOne(targetEntity="Petlost\FrontBundle\Entity\Mascota", inversedBy="anuncios", cascade={"persist"})
+     * @Assert\Type("Petlost\FrontBundle\Entity\Mascota")
+     */
+    private $mascota;
+    /**
+     * @ORM\OneToMany(targetEntity="Petlost\UsuarioBundle\Entity\Zona", mappedBy="anuncio", cascade={"persist"})
+     */
+    protected $zonas;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Petlost\FrontBundle\Entity\Perdido", mappedBy="anuncio", cascade={"persist"})
+     */
+    protected $perdidos;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Petlost\UsuarioBundle\Entity\Mensaje", mappedBy="anuncio")
+     **/
+    private $mensajes;
+
+
+    public function __toString() 
+    {
+        return $this->getTitulo();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->zonas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     * @return Anuncio
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+        $this->slug = Util::getSlug($titulo);
+    
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string 
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Anuncio
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Anuncio
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Anuncio
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Anuncio
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set mascota
+     *
+     * @param \Petlost\FrontBundle\Entity\Mascota $mascota
+     * @return Anuncio
+     */
+    public function setMascota(\Petlost\FrontBundle\Entity\Mascota $mascota = null)
+    {
+        $this->mascota = $mascota;
+    
+        return $this;
+    }
+
+    /**
+     * Get mascota
+     *
+     * @return \Petlost\FrontBundle\Entity\Mascota 
+     */
+    public function getMascota()
+    {
+        return $this->mascota;
+    }
+
+    /**
+     * Add zonas
+     *
+     * @param \Petlost\UsuarioBundle\Entity\Zona $zonas
+     * @return Anuncio
+     */
+    public function addZona(\Petlost\UsuarioBundle\Entity\Zona $zonas)
+    {
+        $this->zonas[] = $zonas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove zonas
+     *
+     * @param \Petlost\UsuarioBundle\Entity\Zona $zonas
+     */
+    public function removeZona(\Petlost\UsuarioBundle\Entity\Zona $zonas)
+    {
+        $this->zonas->removeElement($zonas);
+    }
+    
+    public function removeAllZona()
+    {
+        $this->zonas=null;
+    }
+
+    /**
+     * Get zonas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getZonas()
+    {
+        return $this->zonas;
+    }
+
+    /**
+     * Add perdidos
+     *
+     * @param \Petlost\FrontBundle\Entity\Perdido $perdidos
+     * @return Anuncio
+     */
+    public function addPerdido(\Petlost\FrontBundle\Entity\Perdido $perdidos)
+    {
+        $this->perdidos[] = $perdidos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove perdidos
+     *
+     * @param \Petlost\FrontBundle\Entity\Perdido $perdidos
+     */
+    public function removePerdido(\Petlost\FrontBundle\Entity\Perdido $perdidos)
+    {
+        $this->perdidos->removeElement($perdidos);
+    }
+
+    /**
+     * Get perdidos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPerdidos()
+    {
+        return $this->perdidos;
+    }
+
+  
+
+}

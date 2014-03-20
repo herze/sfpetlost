@@ -1,0 +1,80 @@
+{% extends '::frontend.html.twig' %}
+{% block article %}
+<h3>Registro nuevo usuario</h3>
+<div class="row">
+    <div class="col-lg-8">
+{{ form_start(form, {'attr':{'role':'form'} } ) }}
+    {{ form_errors(form) }}
+    {{ form_errors(formZona) }}
+
+    <div class="form-group">
+        <lavel>{{ form_label(form.nombre) }}</lavel>
+        {{ form_errors(form.nombre) }}
+        {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'placeholder':'Introduce tu nombre' } }) }}
+    </div>
+    <div class="form-group">
+        <lavel>{{ form_label(form.apellidos) }}</lavel>
+        {{ form_errors(form.apellidos) }}
+        {{ form_widget(form.apellidos, { 'attr': { 'class': 'form-control','placeholder' :'Introduce tu apellido completo'} }) }}
+    </div>
+    <div class="form-group">
+        <lavel>{{ form_label(form.email) }}</lavel>
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, { 'attr': { 'class': 'form-control','placeholder' :'ejemplo@gmail.com'} }) }}
+    </div>
+<div>
+    {{ form_errors(form.password) }}
+    <div class="form-group">
+            {{ form_label(form.password.first)}}
+            {{ form_errors(form.password.first) }}
+            {{ form_widget(form.password.first, {'attr': { 'class':'form-control','placeholder' :'Ingrese su contraseña'} }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.password.second)}}
+        {{ form_errors(form.password.second) }}
+        {{ form_widget(form.password.second, {'attr': { 'class':'form-control','placeholder' :'Repita la contraseña'} }) }}
+    </div>
+</div>
+
+        
+<!-- Esta parte solo es para mostrar la captura  de datos -->
+<div>
+    {{ form_label(formZona.longitude) }}
+    {{ form_errors(formZona.longitude) }}
+    {{ form_widget(formZona.longitude) }}
+    </div>
+    <div>
+    {{ form_label(formZona.latitude) }}
+    {{ form_errors(formZona.latitude) }}
+    {{ form_widget(formZona.latitude) }}
+    </div>
+    <div>
+    {{ form_label(formZona.direccion) }}
+    {{ form_errors(formZona.direccion) }}
+    {{ form_widget(formZona.direccion) }}
+    </div>
+<!-- -->
+
+    <div>
+        
+        {{ form_widget(form.Registrar, { 'attr': {'class':'btn btn-primary' } })}}
+        <input type="button" class="btn btn-default" value="Cancelar" onclick="document.location.href='{{ path('portada')}}'" >
+    </div>
+{{ form_end(form) }}
+</div>
+    <div class="col-lg-4">
+        {% block mapa %}
+        <div id="status"></div>
+    <div id="map_canvas"></div>
+{% endblock %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="{{ asset('bundles/usuario/js/latlong.js') }}"></script>
+    
+{% endblock %}

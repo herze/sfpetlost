@@ -1,0 +1,28 @@
+usuario_homepage:
+    pattern:  /
+    defaults: { _controller: UsuarioBundle:Default:index }
+
+usuario_registro:
+    pattern:  /registro
+    defaults: { _controller: UsuarioBundle:Default:registro }
+    
+# Ruta para la acción de login de de los usuarios del frontend
+usuario_login:
+    pattern:   /login
+    defaults:  { _controller: UsuarioBundle:Default:login }
+
+# Ruta para la acción que comprueba el login del frontend
+usuario_login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de los usuarios del frontend extranet
+usuario_logout:
+    pattern:   /logout
+    
+usuario_addzona:
+    pattern:  /addzona
+    defaults: { _controller: UsuarioBundle:Default:addzona }
+    
+usuario_addanuncio:
+    pattern:  /anuncio/add
+    defaults: { _controller: UsuarioBundle:Anuncio:addanuncio }

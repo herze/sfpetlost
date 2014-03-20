@@ -1,0 +1,7 @@
+<select>
+{% for ciudad in ciudades%}
+    <option value="{{ ciudad.slug }}">
+{{ ciudad.nombre }}
+</option>
+{% endfor %}
+</select>

@@ -1,0 +1,115 @@
+.content{
+    padding: 5px 40px;
+}
+
+.header{
+    background: white;
+    
+}
+
+.menu{
+    text-align: center;
+}
+
+.menu li{
+    display: inline-block;
+    padding: 8px;
+    margin: 8px;
+    
+}
+
+.menu li a{
+    color: #43A6DF;
+}
+
+.logo img{
+    width: 70px;
+}
+
+.registro{
+    text-align: right;
+    margin: 8px;
+    padding: 8px;   
+}
+
+.ingreso{
+    background: #285e8e;
+}
+.ingreso ul{
+    background: #101010;
+}
+
+
+.ingreso li{
+    width: 40%;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px;
+}
+
+.ingreso li a{
+    color: white;
+}
+
+.ingreso li a:hover{
+    text-decoration: none;
+    color: #ac2925;
+}
+
+.name-p{
+    color: #285e8e;
+    font-size: 21px;
+    position: absolute;
+    left: 90px;
+    top: 10px;
+}
+
+.name-s{
+    font-size: 21px;
+    position: absolute;
+    left: 80px;
+    top: 30px;
+    color: red;
+    
+}
+
+footer{
+    background: #333333;
+    color: #777777;
+    font-weight: 700;
+    font-size: 1.35rem;
+}
+
+.footer{
+    display: inline;
+    
+}
+
+.footer a{
+    display: inline-block;
+    text-decoration: none;
+    color: #777777;
+    text-transform: uppercase;
+    
+}
+
+.footer li
+{
+    display: inline-block;
+    padding: 15px 45px 0 0px;
+}
+
+.logo-mediano{
+    background: url("../images/geo.png") no-repeat 0 3px;
+}
+
+.footer p{
+    padding: 0px 0px 0px 42px;
+}
+
+#map_canvas
+{
+    height: 300px;
+    width: 400px;
+}

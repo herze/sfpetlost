@@ -1,0 +1,3 @@
+ciudad_listar:
+    pattern:  /ciudad/cambiar-a-{ciudad}
+    defaults: { _controller: CiudadBundle:Default:listar }

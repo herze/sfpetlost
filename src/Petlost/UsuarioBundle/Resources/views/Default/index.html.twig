@@ -1,0 +1,58 @@
+{% extends '::frontend.html.twig' %}
+{% block article %}
+
+<article>
+    <div class="row">
+        <div class="col-lg-4">
+            Mostrar mensajes que tengas
+        </div>
+        <div class="col-lg-4">
+            <h4>Mis Anuncios</h4>
+            {% for anuncio in anuncios%}
+            <a href="#">{{ anuncio.anuncio.titulo }}</a>
+            {% if mensaje %}
+            <h4>Tiene un mensaje</h4>
+            <div>De:{{ mensaje.usuario.nombre }}</div>
+            <div>{{ mensaje.descripcion }}</div>
+            <div>
+                
+                {% for zona in mensaje.zonas %}
+                    {{ zona.direccion }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-lg-4">
+            Mostrar los Anuncios que necesita tu atencion
+            {% if zonas %}
+                {% for zona in zonas %}
+                    {% for zon in zona %}
+            <div>
+                        <a href="{{ path('anuncio_show',{ 'ciudad':'cochabamba','slug':zon.anuncio.slug })}}">{{ zon.anuncio.titulo}}</a>
+                        Ubicacion:{{ zon.direccion }}
+            </div>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+            <h6>No existe anuncios</h6>
+            {% endif %}
+            
+        </div>
+    </div>
+    <div>
+        <a href="{{ path('usuario_addzona')}}">Agregar zona</a><br>
+        <a href="{{ path('usuario_addanuncio')}}">Agregar Anuncio</a>
+    </div>
+</article>
+<article>
+    <div>
+        <h4>Mis Zonas de Ayuda</h4>
+    {% for zona in mizona%}
+        <div>
+        {{ zona.direccion }}
+            </div>
+    {% endfor %}
+    </div>
+</article>
+{% endblock %}

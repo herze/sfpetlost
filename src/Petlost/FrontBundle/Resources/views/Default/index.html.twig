@@ -1,0 +1,88 @@
+{% extends '::frontend.html.twig' %}
+{% block article %}
+<div class="articulo">
+    <div class="row">
+        <div class="col-lg-12">
+        <section class="slider">
+            <div class="flexslider">
+            <ul class="slides">
+            {% for anuncio in anuncios%}
+            <li>
+                
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-1">
+                        <h1><a href="{{ path('anuncio_show',{'ciudad':'cochabamba','slug':anuncio.anuncio.slug}) }}">{{ anuncio.anuncio.titulo }}</a></h1>
+                        {{ anuncio.anuncio.descripcion }}
+                        <section class="mascota">
+                            <h3>Datos Mascota</h3>
+                            <div>
+                            Nombre:{{ anuncio.anuncio.mascota.nombre }}
+                            </div>
+                            <div>
+                                Categoria:{{ anuncio.anuncio.mascota.categoria }}
+                            </div>                                
+                            <div>
+                                Raza:{{ anuncio.anuncio.mascota.raza }}
+                            </div>
+                            <div>
+                                Sexo:{{ anuncio.anuncio.mascota.sexo }}
+                            </div>
+                            <div>
+                                Identificacion:{{ anuncio.anuncio.mascota.identificacion }}
+                            </div>
+                            <div>
+                                Enfermedad:{{ anuncio.anuncio.mascota.enfermedad }}
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-2">
+                        <section class="galeria">
+                            
+                        {% for foto in anuncio.anuncio.mascota.fotos | slice(0, 1) %}
+                        <img src="{{ asset('uploads/images/'~foto.url)}}">
+                        {% endfor %}
+                        </section>
+                    </div>
+                </div>
+            <section class="anuncio">
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-1">
+                        Si tiene algun dato:{{ anuncio.celular }}
+                    </div>
+                    <div class="col-lg-2 col-lg-offset-2">
+                        Fecha que se Perdio:{{  anuncio.fechaExtravio | date('Y/m/d')}}
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-2">
+                        El anuncio fue creado:{{ anuncio.anuncio.created | date('Y-m-d')}}
+                    </div>
+                </div>
+            </section>
+
+            
+                
+            
+
+            </li>
+            {% endfor%}
+                </ul>
+            </div>
+                </section>
+        </div>
+        
+    </div>
+        
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="{{ asset('bundles/front/js/jquery.flexslider.js') }}"></script>
+    <!-- Place in the <head>, after the three links -->
+    <script type="text/javascript" charset="utf-8">
+      $(window).load(function() {
+        $('.flexslider').flexslider();
+      });
+    </script>
+    
+{% endblock %}

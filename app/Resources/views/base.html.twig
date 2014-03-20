@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="content">
+        {% block body %}{% endblock %}
+        <footer>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-2 footer">
+                
+                <ul>
+                    
+                    <li><a href="#">Acerca</a></li>
+                    <li><a href="#">Ultimos</a></li>
+                    <li><a href="#">Contactanos</a></li>
+                    <li><a href="#">Sitio Map</a></li>      
+                </ul>
+                <p>
+                    © 1998–2014 Herzed, Inc. All rights reserved.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                algo pondre aca
+            </div>
+        </div>
+            
+        </footer>
+            {% block javascripts %}{% endblock %}
+        </div>
+    </body>
+</html>

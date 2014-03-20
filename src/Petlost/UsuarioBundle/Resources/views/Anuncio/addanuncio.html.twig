@@ -1,0 +1,22 @@
+{% extends '::frontend.html.twig' %}
+{% block article %}
+Agregar Anuncios
+
+{{ form_start(formulario, {'attr':{'role':'form'} } ) }}
+    {{ form_errors(formulario) }}
+    
+
+    <div class="form-group">
+        <lavel>{{ form_label(formulario.anuncio.titulo) }}</lavel>
+        {{ form_errors(formulario.anuncio.titulo) }}
+        {{ form_widget(formulario.anuncio.titulo) }}
+    </div>
+    
+
+    <div>
+        
+        {{ form_widget(formulario.Registrar, { 'attr': {'class':'btn btn-primary' } })}}
+        <input type="button" class="btn btn-default" value="Cancelar" onclick="document.location.href='{{ path('portada')}}'" >
+    </div>
+{{ form_end(formulario) }}
+{% endblock %}

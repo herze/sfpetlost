@@ -1,0 +1,11 @@
+portada:
+    pattern:  /{ciudad}/
+    defaults: { _controller: FrontBundle:Default:portada, ciudad: %petlost.ciudad_por_defecto% }
+    
+_portada:
+     pattern:  /
+     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%petlost.ciudad_por_defecto%' }
+
+anuncio_show:
+    pattern:  /{ciudad}/anuncio/showanuncio/{slug}
+    defaults: { _controller: FrontBundle:Default:showanuncio }
